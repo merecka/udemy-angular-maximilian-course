@@ -1,0 +1,69 @@
+<div class="container">
+  <app-cockpit
+    (serverCreated)="onServerAdded($event)"
+    (bpCreated)="onBlueprintAdded($event)"
+  ></app-cockpit>
+  <hr />
+  <div class="row">
+    <div class="col-xs-12">
+      <button class="btn btn-primary" (click)="onChangeFirst()">
+        Change first Element
+      </button>
+      <button class="btn btn-danger" (click)="onDestroyFirst()">
+        Destroy first Component
+      </button>
+      <app-server-element
+        *ngFor="let serverElement of serverElements"
+        [srvElement]="serverElement"
+        [name]="serverElement.name"
+      >
+        <p #contentParagraph>
+          <strong *ngIf="serverElement.type === 'server'" style="color: red;">{{
+            serverElement.content
+          }}</strong>
+          <em *ngIf="serverElement.type === 'blueprint'">{{
+            serverElement.content
+          }}</em>
+        </p>
+      </app-server-element>
+      <hr />
+      <div class="row">
+        <div class="col-xs-12">
+          <app-game-control (counterEmitter)="storeCounterNumbers($event)">
+          </app-game-control>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-6">
+          <app-odd
+            *ngFor="let counterElement of counterNumbersArray"
+            [counterElement]="counterElement"
+          >
+          </app-odd>
+        </div>
+        <div class="col-xs-6">
+          <app-even
+            *ngFor="let counterElement of counterNumbersArray"
+            [counterElement]="counterElement"
+          >
+          </app-even>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- <app-odd-component *ngFor="let counterElement of counterNumbersArray">
+            <p *ngIf="counterElement % 2 != 0" style="color: blue;">
+              Odd - {{ counterElement }}
+            </p>
+          </app-odd-component>
+        </div>
+        <div class="col-xs-6">
+          <app-even-component
+            *ngFor="let counterElement of counterNumbersArray"
+          >
+            <p *ngIf="counterElement % 2 === 0" style="color: red;">
+              Even - {{ counterElement }}
+            </p>
+          </app-even-component> -->
